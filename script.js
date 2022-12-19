@@ -2,6 +2,7 @@ const homeScreen = document.getElementById('home-screen')
 const startGameBtn = document.getElementById('start-game-btn')
 const signInBtn = document.getElementById('sign-in-btn')
 const gameRulesBtn = document.getElementById('rules-game-btn')
+const scoreGameBtn = document.getElementById('score-game-btn')
 const playScreen = document.getElementById('play-screen')
 let rollDiceBtn = document.getElementById('roll-dice-btn')
 let holdBtn= document.getElementById('hold-btn')
@@ -85,10 +86,12 @@ let titleLineDrawing1 = anime({
 const stateBuild = () => {
     console.log('statebd');
     player.roundCount = 1
+    addEvent()
     animationDisplayNone(signInBtn, 0)
     animationDisplayNone(homeScreen, 0)
     disabledBtn(startGameBtn)
     disabledBtn(gameRulesBtn)
+    disabledBtn(scoreGameBtn)
     animationDisplayBlock(playScreen, 1.3)
     reabledBtn(rollDiceBtn)   
     reabledBtn(holdBtn)
@@ -205,7 +208,6 @@ const hold = () => {
 }
 
 function playerWin() {
-    yourCurrentScore.innerHTML = ` ${player.roundCount} `
     disabledBtn(holdBtn)
     disabledBtn(rollDiceBtn)
     animationDisplayNone(playScreen, .8, 'ease-out')
@@ -213,9 +215,23 @@ function playerWin() {
     setTimeout( () => {
     animationDisplayNone(playerWinScreen, .8, 'ease-out')
     seeForm()
+    player.player.score = 0
+    playerCount.innerHTML = player.player.score
     }, '3000 ')
-
 }
+
+let winLineDrawing = anime({
+    targets: '#winlineDrawing .lines path',
+    strokeDashoffset: [anime.setDashoffset, 0],
+    easing: 'easeInOutSine',
+    duration: 2800,
+    delay: 0,
+    autoplay: false,
+    direction: 'alternate',
+    loop: true
+  });
+document.querySelector('#hold-btn').onclick = winLineDrawing.play
+
 
 function iaWin() {
     disabledBtn(holdBtn)
@@ -227,6 +243,17 @@ function iaWin() {
         seeForm()
     }, '3000')
 }
+
+let looseLineDrawing = anime({
+targets: '#looseLineDrawing .lines path',
+strokeDashoffset: [anime.setDashoffset, 0],
+easing: 'easeInOutSine',
+duration: 2800,
+autoplay: false,
+delay: 0,
+direction: 'alternate',
+loop: true
+});
 
 function seeForm() {
     reabledBtn(closeFormBtn)
@@ -240,6 +267,7 @@ function closeForm() {
     animationDisplayNone(form, 1.1, 'ease')
     reabledBtn(startGameBtn)
     reabledBtn(gameRulesBtn)
+    reabledBtn(scoreGameBtn)
     animationDisplayBlock(homeScreen, 1.1, 'ease')
     animationDisplayBlock(signInBtn, 1.1, 'ease')
 }
@@ -259,8 +287,13 @@ function addEventWithDelay() {
     }, '1800')
 }
 
+function addEvent() {
+    rollDiceBtn.addEventListener('click', rollDice)
+    holdBtn.addEventListener('click', hold)              
+}
+
 // ADD EVENTS LISTENERS
 closeFormBtn.addEventListener('click', closeForm)
-  startGameBtn.addEventListener('click', stateBuild)
-  rollDiceBtn.addEventListener('click', rollDice)
-  holdBtn.addEventListener('click', hold)
+startGameBtn.addEventListener('click', stateBuild)
+rollDiceBtn.addEventListener('click', rollDice)
+holdBtn.addEventListener('click', hold)

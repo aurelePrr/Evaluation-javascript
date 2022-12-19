@@ -13092,6 +13092,7 @@ textarea.form-control-lg {
   --btnColor: rgb(224, 220, 211);
   --btnBorder: rgb(105, 97, 97) ;
   --btnHover: rgb(46, 180, 151);
+  --btnPrimaryHover: rgb(230, 134, 86);
   --scaleMarginBtn: 0.6rem;
 }
 
@@ -13336,20 +13337,33 @@ body {
 #form .form-check-label a {
   cursor: grab;
 }
-#form .close-form-btn {
+#form #close-form-btn {
   width: 3rem;
   position: absolute;
-  top: -5rem;
+  top: -3.5rem;
   right: 1.3rem;
   padding: 0.4rem 0.1rem;
   border-radius: 5px;
-  border: 2px solid rgba(207, 202, 202, 0.75);
   box-shadow: 4px 3px 5px -1px rgba(207, 202, 202, 0.75);
+  border: 2px solid rgba(207, 202, 202, 0.75);
   cursor: grab;
 }
 
 #submit-form-btn {
   cursor: grab;
+  box-shadow: 1px 1px 5px 0px rgba(207, 202, 202, 0.75);
+}
+
+#submit-form-btn:hover {
+  background: var(--btnPrimaryHover);
+}
+
+#submit-form-btn:active {
+  border: 2px solid rgba(207, 202, 202, 0.75);
+}
+
+#submit-form-btn:hover, #close-form-btn:hover {
+  transform: scale(1.1);
 }
 
 /*# sourceMappingURL=style.css.map */
