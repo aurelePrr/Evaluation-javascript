@@ -13101,6 +13101,11 @@ body {
   background: rgb(7, 7, 7);
   color: rgb(211, 200, 175);
   overflow: hidden;
+  cursor: cell;
+}
+
+#sign-in-btn {
+  cursor: grab;
 }
 
 #home-screen {
@@ -13168,6 +13173,7 @@ body {
   transform: rotateY(-180deg) translateZ(calc(var(--cubeSize) / 2));
 }
 #home-screen .home-btn #start-game-btn, #home-screen .home-btn #rules-game-btn, #home-screen .home-btn #score-game-btn {
+  cursor: grab;
   padding: 0.4rem 1.3rem;
   border-radius: 3px;
   background: var(--btnColor);
@@ -13270,6 +13276,7 @@ body {
   transform: rotateY(-180deg) translateZ(calc(var(--cubeSize2) / 2));
 }
 #play-screen .game-btn #roll-dice-btn, #play-screen .game-btn #hold-btn {
+  cursor: grab;
   background: rgb(10, 10, 10);
   box-shadow: 5px 5px 9px 0px rgba(75, 28, 28, 0.75);
   border-radius: 0.4rem;
@@ -13309,6 +13316,40 @@ body {
   transform: translate(-50%);
   opacity: 0;
   display: none;
+}
+
+#form {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+}
+#form .form-check-input {
+  cursor: grab;
+}
+#form .form-check-label {
+  cursor: cell;
+}
+#form .form-check-label a {
+  cursor: grab;
+}
+#form .close-form-btn {
+  width: 3rem;
+  position: absolute;
+  top: -5rem;
+  right: 1.3rem;
+  padding: 0.4rem 0.1rem;
+  border-radius: 5px;
+  border: 2px solid rgba(207, 202, 202, 0.75);
+  box-shadow: 4px 3px 5px -1px rgba(207, 202, 202, 0.75);
+  cursor: grab;
+}
+
+#submit-form-btn {
+  cursor: grab;
 }
 
 /*# sourceMappingURL=style.css.map */

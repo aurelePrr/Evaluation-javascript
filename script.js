@@ -16,7 +16,10 @@ const iaRoundCount = document.getElementById('ia-round-count')
 const iaRoundScreen =  document.getElementById('ia-round-screen')
 const iaWinScreen =  document.getElementById('ia-win-screen')
 const playerWinScreen = document.getElementById('player-win-screen')
-const yourCurrentScore = document.getElementById('your-current-score')
+let yourCurrentScore = document.getElementById('your-current-score')
+const form = document.getElementById('form')
+const closeFormBtn = document.getElementById('close-form-btn')
+const submitFormBtn = document.getElementById('submit-form-btn')
 
 const player = {
     activePlayer: true,
@@ -81,6 +84,7 @@ let titleLineDrawing1 = anime({
 
 const stateBuild = () => {
     console.log('statebd');
+    player.roundCount = 1
     animationDisplayNone(signInBtn, 0)
     animationDisplayNone(homeScreen, 0)
     disabledBtn(startGameBtn)
@@ -201,14 +205,14 @@ const hold = () => {
 }
 
 function playerWin() {
-    yourCurrentScore.innerHTML = ` ${player.player.roundCount} `
+    yourCurrentScore.innerHTML = ` ${player.roundCount} `
     disabledBtn(holdBtn)
     disabledBtn(rollDiceBtn)
     animationDisplayNone(playScreen, .8, 'ease-out')
     animationDisplayBlock(playerWinScreen, .8, 'ease-out')
     setTimeout( () => {
     animationDisplayNone(playerWinScreen, .8, 'ease-out')
-    /* seeForm() */
+    seeForm()
     }, '3000 ')
 
 }
@@ -220,10 +224,24 @@ function iaWin() {
     animationDisplayBlock(iaWinScreen, .8, 'ease-in')
     setTimeout( () => {
         animationDisplayNone(iaWinScreen, .8, 'ease-in')
-        /* seeForm() */
-    }, '50000')
-    
+        seeForm()
+    }, '3000')
+}
 
+function seeForm() {
+    reabledBtn(closeFormBtn)
+    reabledBtn(submitFormBtn)
+    animationDisplayBlock(form, .8, 'ease-out')
+}
+
+function closeForm() {
+    console.log('close')
+    disabledBtn(closeFormBtn)
+    animationDisplayNone(form, 1.1, 'ease')
+    reabledBtn(startGameBtn)
+    reabledBtn(gameRulesBtn)
+    animationDisplayBlock(homeScreen, 1.1, 'ease')
+    animationDisplayBlock(signInBtn, 1.1, 'ease')
 }
 
 // EVENT FUNCTIONS 
@@ -242,6 +260,7 @@ function addEventWithDelay() {
 }
 
 // ADD EVENTS LISTENERS
+closeFormBtn.addEventListener('click', closeForm)
   startGameBtn.addEventListener('click', stateBuild)
   rollDiceBtn.addEventListener('click', rollDice)
   holdBtn.addEventListener('click', hold)
