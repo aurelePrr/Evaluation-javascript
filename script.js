@@ -210,6 +210,9 @@ const hold = () => {
 function playerWin() {
     disabledBtn(holdBtn)
     disabledBtn(rollDiceBtn)
+    disabledBtn(gameRulesBtn)
+    disabledBtn(startGameBtn)
+    disabledBtn(scoreGameBtn)
     animationDisplayNone(playScreen, .8, 'ease-out')
     animationDisplayBlock(playerWinScreen, .8, 'ease-out')
     setTimeout( () => {
@@ -220,19 +223,22 @@ function playerWin() {
     }, '3000 ')
 }
 
-let winLineDrawing = anime({
-    targets: '#winlineDrawing .lines path',
-    strokeDashoffset: [anime.setDashoffset, 0],
-    easing: 'easeInOutSine',
-    duration: 2800,
-    delay: 0,
-    autoplay: false,
-    direction: 'alternate',
-    loop: true
-  });
-document.querySelector('#hold-btn').onclick = winLineDrawing.play
 
-
+/* (function() {
+    holdBtn.onclick = console.log('line');
+     let winLineDrawing = anime({
+        targets: '#winlineDrawing .lines path',
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeInOutSine',
+        duration: 2800,
+        delay: 0,
+        autoplay: false,
+        direction: 'alternate',
+        loop: true
+    });
+    holdBtn.onclick = winLineDrawing.play
+})
+ */
 function iaWin() {
     disabledBtn(holdBtn)
     disabledBtn(rollDiceBtn)
@@ -244,7 +250,7 @@ function iaWin() {
     }, '3000')
 }
 
-let looseLineDrawing = anime({
+/* let looseLineDrawing = anime({
 targets: '#looseLineDrawing .lines path',
 strokeDashoffset: [anime.setDashoffset, 0],
 easing: 'easeInOutSine',
@@ -253,7 +259,7 @@ autoplay: false,
 delay: 0,
 direction: 'alternate',
 loop: true
-});
+}); */
 
 function seeForm() {
     reabledBtn(closeFormBtn)

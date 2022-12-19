@@ -7362,7 +7362,7 @@ textarea.form-control-lg {
   top: 75% !important;
 }
 
-.top-92 {
+.top-80 {
   top: 80% !important;
 }
 
@@ -7398,7 +7398,7 @@ textarea.form-control-lg {
   bottom: 75% !important;
 }
 
-.bottom-92 {
+.bottom-80 {
   bottom: 80% !important;
 }
 
@@ -7434,7 +7434,7 @@ textarea.form-control-lg {
   left: 75% !important;
 }
 
-.start-92 {
+.start-80 {
   left: 80% !important;
 }
 
@@ -7470,7 +7470,7 @@ textarea.form-control-lg {
   right: 75% !important;
 }
 
-.end-92 {
+.end-80 {
   right: 80% !important;
 }
 
@@ -13105,8 +13105,22 @@ body {
   cursor: cell;
 }
 
-#sign-in-btn {
+.sign-in #sign-in-btn {
   cursor: grab;
+  z-index: 0;
+}
+.sign-in #sign-in-text {
+  color: var(--btnColor);
+  background: rgb(7, 7, 7);
+  transform: translateY(-2.5rem) translateX(0.5rem);
+  z-index: -1;
+  opacity: 0;
+}
+
+.sign-in:hover #sign-in-text {
+  transition: all 0.2s ease;
+  opacity: 1;
+  transform: translateY(0rem) translateX(0.5rem);
 }
 
 #home-screen {
