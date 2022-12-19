@@ -60,22 +60,34 @@
     <div id="play-screen" class="container-lg position-absolute top-0">
         <header class="header mt-3">            
             <div class="score d-flex justify-content-around">
-                <div id="player-score" class="player-score mt-3 ms-sm-3 ms-lg-5">
-                    <h2 class="player-score text-primary fw-bold ps-1 display-md-6">Player Score :
-                        <span id="player-count">0</span>
-                    </h2>
-                    <h3 class="player-round-score text-primary fw-bold ps-md-5 mt-4">Round Score :
-                        <span id="player-round-count">0</span>
-                    </h3>
+                <div class="card-wrapper">
+                    <div id="player-score-card" class="mt-3 ms-sm-3 ms-lg-5 position-relative">
+                        <div class="player-score-front">
+                            <h2 class="player-score text-primary fw-bold ps-1 display-md-6">Player Score :
+                                <span id="player-count">0</span>
+                            </h2>
+                            <h3 class="player-round-score text-primary fw-bold ps-md-5 mt-4">Round Score :
+                                <span id="player-round-count">0</span>
+                            </h3>
+                        </div>                        
+                        <div class="player-score-back"></div>
+                    </div>
                 </div>
-                <div id="ia-score" class="ia-score mt-3 me-sm-3 me-lg-5">
-                    <h2 class="ia-score text-secondary fw-bold display-md-6 ">IA Score :
-                        <span id="ia-count">0</span>
-                    </h2>
-                    <h3 class="ia-round-score text-secondary fw-bold pe-md-5 pe-1 mt-4">Round Score :
-                        <span id="ia-round-count">0</span>
-                    </h3>
-                </div>                
+               
+                <div class="card-wrapper">
+                    <div id="ia-score-card" class="ia-score mt-3 me-sm-3 me-lg-5 position-relative">
+                        <div class="ia-score-front">
+                            <h2 class="ia-score text-secondary fw-bold display-md-6 ">IA Score :
+                                <span id="ia-count">0</span>
+                            </h2>
+                            <h3 class="ia-round-score text-secondary fw-bold pe-md-5 pe-1 mt-4">Round Score :
+                                <span id="ia-round-count">0</span>
+                            </h3>
+                        </div>
+                        <div class="ia-score-back"></div>                     
+                    </div> 
+                </div>
+
             </div>        
         </header>
         <section id="gameBoard" class="mt-6">

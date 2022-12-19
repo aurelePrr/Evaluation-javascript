@@ -13217,13 +13217,35 @@ body {
   display: none;
   opacity: 0;
 }
-#play-screen #player-score, #play-screen #ia-score {
+#play-screen .card-wrapper {
+  position: relative;
+  perspective: 1000px;
+  perspective-origin: top;
+}
+#play-screen .score-card-animation {
+  transform: rotateY(180deg);
+}
+#play-screen #player-score-card, #play-screen #ia-score-card {
   margin: 0.3rem;
   display: none;
   background: rgb(20, 19, 19);
-  box-shadow: 2px 2px 13px 5px rgba(65, 45, 45, 0.75), -11px -8px 13px 0px rgba(65, 45, 45, 0.65);
+  box-shadow: 0px 0px 7px 10px rgba(153, 138, 138, 0.45);
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
+}
+#play-screen .player-score-front, #play-screen .player-score-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+#play-screen .player-score-back {
+  transform: rotateY(180deg);
+}
+#play-screen .ia-score-front, #play-screen .ia-score-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+#play-screen .ia-score-back {
+  transform: rotateY(180deg);
 }
 #play-screen #gameBoard {
   position: relative;

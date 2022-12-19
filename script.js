@@ -7,8 +7,8 @@ const playScreen = document.getElementById('play-screen')
 let rollDiceBtn = document.getElementById('roll-dice-btn')
 let holdBtn= document.getElementById('hold-btn')
 const gameTitle = document.getElementById('game-title')
-const playerScore = document.getElementById('player-score')
-const iaScore = document.getElementById('ia-score')
+const playerScore = document.getElementById('player-score-card')
+const iaScore = document.getElementById('ia-score-card')
 const playerCount = document.getElementById('player-count')
 const playerRoundCount = document.getElementById('player-round-count')
 const playerRoundScreen = document.getElementById('player-round-screen')
@@ -100,6 +100,8 @@ const stateBuild = () => {
     animationF(gameTitle, 'rotate', 9)
     animationF(playerScore, 'fade-down-right', 0.6, 'ease-out')
     animationF(iaScore, 'fade-down-left', 0.6, 'ease-out')
+    cardTurnAnimationAdd(iaScore)
+
 }
 
 function roundScreen() {
@@ -113,12 +115,28 @@ function roundScreen() {
     }
 }
 
+function cardTurnAnimationAdd(el){
+    el.classList.add("score-card-animation")
+    el.style.transformStyle = ("preserve-3d")
+    el.style.transition = ("transform 0.8s cubic-bezier(.65,.6,.52,1.49)")
+    el.style.boxShadow = 'none'
+}
+
+function cardTurnAnimationRemove(el){
+el.classList.remove('score-card-animation')
+el.style.transformStyle = ('preserve-3d');
+el.style.transition = ('transform 0.8s cubic-bezier(.65,.6,.52,1.49)')
+el.style.boxShadow = '0px 0px 7px 10px rgba(153, 138, 138, 0.45)'
+}
+
 function playerRoundScreenAnimation() {
     animationDisplayBlock(iaRoundScreen, .8, 'ease')
     setTimeout( () => {
         console.log('time');
         animationDisplayNone(iaRoundScreen, .8, 'ease')
         playScreen.style.opacity = 1
+        cardTurnAnimationAdd(playerScore)
+        cardTurnAnimationRemove(iaScore)
     }, '1800')
     
 }
@@ -129,6 +147,8 @@ function iaRoundScreenAnimation() {
         console.log('screen round animation');
         animationDisplayNone(playerRoundScreen, .8, 'ease')
         playScreen.style.opacity = 1
+        cardTurnAnimationAdd(iaScore)
+        cardTurnAnimationRemove(playerScore)
     }, '1800')
 }
 
