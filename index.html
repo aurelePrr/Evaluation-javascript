@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
-<body class="text-center m-0 p-0 w-100">
+<body class="text-center m-0 p-0">
 
     <!-- HOME SCREEN -->
-    <main id="home-screen" class="container d-flex flex-column align-items-center">
+    <main id="home-screen" class="container d-flex flex-column align-items-center position-absolute top-0 start-50">
         <header id="game-title">
             <div id="titleLineDrawing1"> 
                 <svg class="titleSvg1 me-5" viewBox="0 0 800 800" style="height: 300px; width: 400px;">
@@ -27,7 +27,7 @@
                 </svg>
             </div>
         </header>
-         <div id="cube" class="position-absolute top-40 mt-4">
+         <div id="cube" class="position-absolute top-37 mt-4">
             <div class="side front"></div>
             <div class="side bottom"></div>
             <div class="side top"></div>
@@ -35,11 +35,12 @@
             <div class="side right"></div>
             <div class="side back"></div>
          </div>
-        <div class="home-btn d-flex flex-column align-items-stretch position-absolute top-75">
+        <div class="home-btn d-flex flex-column align-items-stretch position-absolute top-68">
             <button id="start-game-btn" type="button" class="text-nowrap start-btn">PRESS TAB FOR PLAY</button>
             <button id="rules-game-btn" type="button" class="text-nowrap start-btn mt-1">GAME'S RULES</button>
             <button id="score-game-btn" type="button" class="text-nowrap start-btn mt-1">Scores</button>
         </div>
+        <p class="sound-source position-absolute top-91 start-50">Sounds Effects and Images from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=6347">Pixabay</a></p>
     </main>
     <div class="sign-in position-absolute top-3 start-80">
         <button id="sign-in-btn" class="btn text-danger">
@@ -49,12 +50,9 @@
                 </svg>
         </button>
         <div id="sign-in-text" class="position-absolute">
-         <p>Sign in</p>
+            <p>Sign in</p>
         </div>
-        
-
     </div>
-   
     <!-- RULES SCREEN -->
     <div id="rules-screen" class="mt-6 ms-3 me-3 position-absolute top-0 start-50">
         <p>
@@ -155,9 +153,9 @@
                 </div>
             </div>
             <audio autoplay="false" id="roll-dice-sound">
-                <source src="./assets/music/rollDice.mp3" type="audio/mpeg ">
-                <source src="./assets/music/rollDice.wav" type="audio/wav">
-                <source src="./assets/music/rollDice.ogg" type="audio/ogg ">
+                <source src="./assets/music/mp3/rollDice.mp3" type="audio/mpeg">
+                <source src="./assets/music/wav/rollDice.wav" type="audio/wav">
+                <source src="./assets/music/ogg/rollDice.ogg" type="audio/ogg">
                 Votre navigateur semble ne pas supporter l'audio               
             </audio>
         </section>
@@ -186,21 +184,46 @@
         </div>
         <button id="restart-btn" class="btn mt-4 position-absolute start-50" type="button" disabled>RESTART</button>
     </div>
-
-     <!-- PLAYER ROUND SCREEN -->
+    <audio autoplay id="boom-sound">
+        <source src="./assets/music/mp3/boom.mp3" type="audio/mpeg">
+        <source src="./assets/music/wav/boom.wav" type="audio/wav">
+        <source src="./assets/music/ogg/boom.ogg" type="audio/ogg">
+        Votre navigateur semble ne pas supporter l'audio
+    </audio>
+    <audio autoplay id="drop-sound">
+        <source src="./assets/music/mp3/drop.mp3" type="audio/mpeg">
+        <source src="./assets/music/wav/drop.wav" type="audio/wav">
+        <source src="./assets/music/ogg/drop.ogg" type="audio/ogg">
+        Votre navigateur semble ne pas supporter l'audio
+    </audio>
+    <!-- ROUND SCREEN -->
      <section id="player-round-screen">
         <p class="text-primary display-1">PLAYER ROUND</p>
     </section>
     <section id="ia-round-screen">
         <p class="text-secondary display-1">IA ROUND</p>
     </section>
+
+        <!-- WIN SCREEN -->
     <section id="player-win-screen" class="text-primary display-9 fw-bold position-absolute top-40 start-50">
         <p class="you-word">YOU</p>
         <p class="win-word">WIN</p>
+        <audio autoplay="false" id="success-sound">
+            <source src="./assets/music/mp3/success.mp3" type="audio/mpeg">
+            <source src="./assets/music/wav/success.wav" type="audio/wav">
+            <source src="./assets/music/ogg/success.ogg" type="audio/ogg">
+            Votre navigateur semble ne pas supporter l'audio               
+        </audio>
     </section>
     <section id="ia-win-screen" class="text-secondary display-9 fw-bold position-absolute top-40 start-50">
        <p class="you-word">YOU</p> 
        <p class="loose-word">LOOSE</p>
+       <audio autoplay="false" id="loose-sound">
+        <source src="./assets/music/mp3/failure.mp3" type="audio/mpeg">
+        <source src="./assets/music/wav/failure.wav" type="audio/wav">
+        <source src="./assets/music/ogg/failure.ogg" type="audio/ogg">
+        Votre navigateur semble ne pas supporter l'audio               
+    </audio>
     </section>
 
     <!-- FORM -->

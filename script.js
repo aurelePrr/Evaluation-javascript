@@ -36,19 +36,21 @@ const form = document.getElementById('form')
 const closeFormBtn = document.getElementById('close-form-btn')
 const submitFormBtn = document.getElementById('submit-form-btn')
 
+/* PLAYERS OBJECT */
 const player = {
     activePlayer: true,
     player: {
         roundScore: 0,
-        score: 99,
+        score: 0,
     },
     roundCount: 0,
     ia: {
         roundScore: 0,
-        score: 99,
+        score: 0,
     } ,
 }
 
+/* ANIMATIONS */
 let titleLineDrawing1 = anime({
     targets: '#titleLineDrawing1 .lines path',
     strokeDashoffset: [anime.setDashoffset, 0],
@@ -96,7 +98,6 @@ let titleLineDrawing1 = anime({
     },'2500')
   }
 
-// SCREENS FUNCTIONS
 function homeScreens() {
     disabledBtn(gameRulesBtn)
     animationDisplayNone(gameRulesBtn, .8, 'ease')
@@ -109,6 +110,8 @@ function homeScreens() {
     startGameBtn.removeEventListener('click', stateBuild)
     scoreGameBtn.removeEventListener('click', seeScores)
 }
+
+
 const seeRules = () => {
     homeScreens()
     animationDisplayBlock(rulesScreen, .8, 'ease')
@@ -134,8 +137,16 @@ function seeScores(){
     homeScreens()
     animationDisplayBlock(scoreScreen, .8, 'ease')
 }
+
+const playBoomSound = () => {
+    document.getElementById('boom-sound').play()
+}
+
+const playDropSound = () => {
+    document.getElementById('drop-sound').play()
+}
 const stateBuild = () => {
-    console.log('statebd');
+    playBoomSound()
     player.roundCount = 1
     addEvent()
     animationDisplayNone(signInBtn, 0)
@@ -206,6 +217,7 @@ function playerWin() {
     disabledBtn(restartBtn)
     animationDisplayNone(playScreen, .8, 'ease-out')
     animationDisplayBlock(playerWinScreen, .8, 'ease-out')
+    document.getElementById('success-sound').play()
     setTimeout( () => {
         animationDisplayBlock(document.querySelector('.win-word'))
     }, '800')
@@ -215,7 +227,7 @@ function playerWin() {
     seeForm()
     player.player.score = 0
     playerCount.innerHTML = player.player.score
-    }, '5200')
+    }, '3500')
 }
 function iaWin() {
     disabledBtn(holdBtn)
@@ -223,10 +235,16 @@ function iaWin() {
     disabledBtn(restartBtn)
     animationDisplayNone(playScreen, .8, 'ease-in')
     animationDisplayBlock(iaWinScreen, .8, 'ease-in')
+    document.getElementById('loose-sound').play()
+    setTimeout( () => {
+        animationDisplayBlock(document.querySelector('.loose-word'))
+    }, '800')
     setTimeout( () => {
         animationDisplayNone(iaWinScreen, .8, 'ease-in')
         seeForm()
-    }, '5200')
+        player.ia.score = 0
+        ia.innerHTML = player.ia.score
+    }, '3500')
 }
 function seeForm() {
     reabledBtn(closeFormBtn)
@@ -248,37 +266,55 @@ function closeForm() {
 /* GAMEPLAY FUNCTIONS */
 const rollDice = () => {
     let rollFace = Math.floor(Math.random() * (6-1+1)+1)
-    if(player.activePlayer) {
+/*     removeEvent() */
+    disabledBtn(rollDiceBtn)
+    disabledBtn(holdBtn)
+    if(player.activePlayer === true) {
         if(rollFace > 1) {
-            player.player.roundScore += rollFace
-            playerRoundCount.innerHTML = player.player.roundScore
+            setTimeout( () => {
+                player.player.roundScore += rollFace
+                playerRoundCount.innerHTML = player.player.roundScore
+               /*  addEvent() */
+                reabledBtn(rollDiceBtn)
+                reabledBtn(holdBtn)
+            },'2300')
+            
         }
         else if(rollFace === 1) {
-            player.roundCount += 1
-            player.player.roundScore = 0
-            playerRoundCount.innerHTML = player.player.roundScore
-            removeEvent()
+            
             setTimeout( () => {
+                player.roundCount += 1
+                player.player.roundScore = 0
+                playerRoundCount.innerHTML = player.player.roundScore
                 roundScreen()
-                player.activePlayer = !player.activePlayer
-                addEventWithDelay()
+                player.activePlayer = false
+                /* addEvent() */
+                reabledBtn(rollDiceBtn)
+                reabledBtn(holdBtn)
             }, '2500')
         }
     } 
-    else if(!player.activePlayer) {
+    else if(player.activePlayer === false) {
         if(rollFace > 1) {
-            player.ia.roundScore += rollFace
-            iaRoundCount.innerHTML = player.ia.roundScore
+            setTimeout( () => {
+                player.ia.roundScore += rollFace
+                iaRoundCount.innerHTML = player.ia.roundScore
+                /* addEvent() */
+                reabledBtn(rollDiceBtn)
+                reabledBtn(holdBtn)
+            }, '2300')
+            
         }
         else if(rollFace === 1) {
-            player.roundCount += 1
-            player.ia.roundScore = 0
-            iaRoundCount.innerHTML = player.ia.roundScore
-            removeEvent()
             setTimeout( () => {
+                player.roundCount += 1
+                player.ia.roundScore = 0
+                iaRoundCount.innerHTML = player.ia.roundScore
                 roundScreen()
                 player.activePlayer = true
-                addEventWithDelay()
+                /* addEvent() */
+                reabledBtn(rollDiceBtn)
+                reabledBtn(holdBtn)
             },'2500')
         }
     }
@@ -288,38 +324,51 @@ const playRollDiceSound = () =>{
     rollDiceSound.play()
 }
 const hold = () => {
-    if(player.activePlayer) {
+    /* removeEvent() */
+    disabledBtn(rollDiceBtn)
+    disabledBtn(holdBtn)
+    if(player.activePlayer === true) {
         player.player.score += player.player.roundScore
         playerCount.innerHTML = player.player.score
         player.player.roundScore = 0
         playerRoundCount.innerHTML = 0
-        removeEvent()
         if(player.player.score < 100) {
             setTimeout( () => {
                 roundScreen()
-                !player.activePlayer
-                addEventWithDelay()
-            }, '800')
+                player.activePlayer = false
+            }, '1500')
+            setTimeout( () => {
+                reabledBtn(holdBtn)
+                reabledBtn(rollDiceBtn)
+            }, '1800')
         }
         else if(player.player.score >= 100){
-            playerWin()
+            setTimeout( () => {
+                playerWin()
+            }, '1500')
+           
         }
     }
-    else if(!player.activePlayer) {
+    else if(player.activePlayer === false) {
         player.ia.score += player.ia.roundScore
         iaCount.innerHTML = player.ia.score
         player.ia.roundScore = 0
         iaRoundCount.innerHTML = 0
-        removeEvent()
         if(player.ia.score < 100) {
             setTimeout( () => {
                 roundScreen()
-                player.activePlayer
-                addEventWithDelay()
-            }, '800')
+                player.activePlayer = true
+            }, '1500')
+            setTimeout( () => {
+                reabledBtn(holdBtn)
+               reabledBtn(rollDiceBtn)
+            }, '1800')
         }
         else if(player.ia.score >= 100) {
-            iaWin()
+            setTimeout( () => {
+                iaWin()
+            }, '1500')
+            
         }
     }
 }
@@ -332,8 +381,8 @@ const resetGame = () => {
     player.player.roundScore = 0
     player.ia.score = 0
     player.ia.roundScore = 0
-    playerCount 
-    playerRoundCount
+    playerCount.innerHTML = 0
+    playerRoundCount.innerHTML = 0
     animationDisplayNone(playScreen, .8, 'ease-in')
     disabledBtn(restartBtn)
     animationDisplayBlock(homeScreen, .8, 'ease-in')
@@ -361,6 +410,17 @@ function addEvent() {
     holdBtn.addEventListener('click', hold)              
 }
 
+function debounce(callback, delay) {
+    let timer
+    return function() {
+      const args = arguments
+      const context = this
+      clearTimeout(timer)
+      timer = setTimeout(function() {
+        callback.apply(context, args)
+      }, delay)
+    }
+}
 // ADD EVENTS LISTENERS
     /* HOME */
     gameRulesBtn.addEventListener('click', seeRules)
@@ -372,6 +432,7 @@ function addEvent() {
     rollDiceBtn.addEventListener('click', rollDiceAnimation)
     rollDiceBtn.addEventListener('click', playRollDiceSound)
     holdBtn.addEventListener('click', hold)
+    holdBtn.addEventListener('click', playDropSound)
     restartBtn.addEventListener('click', resetGame)
 
     closeFormBtn.addEventListener('click', closeForm)
