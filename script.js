@@ -53,7 +53,7 @@ let titleLineDrawing1 = anime({
     targets: '#titleLineDrawing1 .lines path',
     strokeDashoffset: [anime.setDashoffset, 0],
     easing: 'easeInOutSine',
-    duration: 2800,
+    duration: 1600,
     direction: 'alternate',
     loop: false
   });
@@ -61,8 +61,8 @@ let titleLineDrawing1 = anime({
     targets: '#titleLineDrawing2 .lines path',
     strokeDashoffset: [anime.setDashoffset, 0],
     easing: 'easeInOutSine',
-    duration: 2800,
-    delay: 2600,
+    duration: 1800,
+    delay: 1650,
     direction: 'alternate',
     loop: false
   });  
@@ -124,7 +124,7 @@ function closeRules() {
     animationDisplayBlock(gameRulesBtn, .8, 'ease')
     gameRulesBtn.addEventListener('click', seeRules)
     animationDisplayBlock(scoreGameBtn, .8, 'ease')
- /*    scoreGameBtn.addEventListener('click', seeScores) */
+    scoreGameBtn.addEventListener('click', seeScores)
     reabledBtn(startGameBtn)  
     animationDisplayBlock(homeScreen)
     animationDisplayNone(rulesScreen)
@@ -207,11 +207,15 @@ function playerWin() {
     animationDisplayNone(playScreen, .8, 'ease-out')
     animationDisplayBlock(playerWinScreen, .8, 'ease-out')
     setTimeout( () => {
+        animationDisplayBlock(document.querySelector('.win-word'))
+    }, '800')
+    
+    setTimeout( () => {
     animationDisplayNone(playerWinScreen, .8, 'ease-out')
     seeForm()
     player.player.score = 0
     playerCount.innerHTML = player.player.score
-    }, '3000 ')
+    }, '5200')
 }
 function iaWin() {
     disabledBtn(holdBtn)
@@ -222,7 +226,7 @@ function iaWin() {
     setTimeout( () => {
         animationDisplayNone(iaWinScreen, .8, 'ease-in')
         seeForm()
-    }, '3000')
+    }, '5200')
 }
 function seeForm() {
     reabledBtn(closeFormBtn)
@@ -279,6 +283,10 @@ const rollDice = () => {
         }
     }
 }
+const playRollDiceSound = () =>{
+    const rollDiceSound = document.getElementById('roll-dice-sound')
+    rollDiceSound.play()
+}
 const hold = () => {
     if(player.activePlayer) {
         player.player.score += player.player.roundScore
@@ -332,7 +340,8 @@ const resetGame = () => {
     reabledBtn(startGameBtn)
     reabledBtn(gameRulesBtn)
     reabledBtn(scoreGameBtn)
-    
+    cardTurnAnimationRemove(iaScore)
+    cardTurnAnimationRemove(playerScore)
 
 }
 
@@ -361,6 +370,7 @@ function addEvent() {
     /* PLAY SCREEN */
     rollDiceBtn.addEventListener('click', rollDice)
     rollDiceBtn.addEventListener('click', rollDiceAnimation)
+    rollDiceBtn.addEventListener('click', playRollDiceSound)
     holdBtn.addEventListener('click', hold)
     restartBtn.addEventListener('click', resetGame)
 
