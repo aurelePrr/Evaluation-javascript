@@ -8,7 +8,6 @@
     <title>Document</title>
 </head>
 <body class="text-center m-0 p-0">
-
     <!-- HOME SCREEN -->
     <main id="home-screen" class="container d-flex flex-column align-items-center position-absolute top-0 start-50">
         <header id="game-title">
@@ -27,7 +26,7 @@
                 </svg>
             </div>
         </header>
-         <div id="cube" class="position-absolute top-37 mt-4">
+         <div id="cube" class="position-absolute top-37">
             <div class="side front"></div>
             <div class="side bottom"></div>
             <div class="side top"></div>
@@ -38,13 +37,14 @@
         <div class="home-btn d-flex flex-column align-items-stretch position-absolute top-68">
             <button id="start-game-btn" type="button" class="text-nowrap start-btn">PRESS TAB FOR PLAY</button>
             <button id="rules-game-btn" type="button" class="text-nowrap start-btn mt-1">GAME'S RULES</button>
-            <button id="score-game-btn" type="button" class="text-nowrap start-btn mt-1">Scores</button>
+            <button id="score-game-btn" type="button" class="text-nowrap start-btn mt-1">SCORES</button>
+            <button id="options-game-btn" type="button" class="text-nowrap start-btn mt-1">OPTIONS</button>
         </div>
-        <p class="sound-source position-absolute top-91 start-50">Sounds Effects and Images from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=6347">Pixabay</a></p>
+        <p class="sound-source position-absolute top-97 start-50">Sounds Effects and Images from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=6347">Pixabay</a></p>
     </main>
     <div class="sign-in position-absolute top-3 start-80">
         <button id="sign-in-btn" class="btn text-danger">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                 </svg>
@@ -106,6 +106,50 @@
           </table>
     </div>
 
+    <!-- OPTIONS SCREEN -->
+    <div id="options-screen" class="container position-absolute top-0 start-0 text-danger">
+        <form id="options-form" class="position-absolute top-3 start-50">
+            <fieldset class="mb-3">
+                <legend id="legendDifficulty" class="row col-8 offset-3 pb-2 fs-2 fw-bold">Choose Your Difficulty</legend>
+                <div class="line bg-danger row col-8 offset-1 mb-5"></div>                    
+                <div class="row col-6 offset-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="easy" id="easy" value="opt" >
+                        <label class="form-check-label" for="easy">
+                        Easy
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="normal" id="normal" value="opt" checked>
+                        <label class="form-check-label" for="normal">
+                        Normal
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="challenge" id="challenge" value="opt">
+                        <label class="form-check-label" for="challenge">
+                        Challenge
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="hardcore" id="hardcore" value="opt">
+                        <label class="form-check-label" for="hardcore">
+                        Hardcore
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <legend id="legend-mute-sounds-btn" class="row col-12 mt-5">Sound</legend>
+            <div id="mute-sounds-btn" class="row mt-8">                
+                <input type="checkbox" class="checkbox checkboxSound">
+                <div class="box-sound-option">
+                    <span class="bg-danger"></span>
+                </div>
+                <div class="background-sound-option"></div>
+            </div>
+        </form>
+    </div>
+
     <!-- PLAY SCREEN -->
     <div id="play-screen" class="container-lg position-absolute top-0">
         <header class="header mt-3">            
@@ -144,12 +188,12 @@
             <div class="border-board position-relative top-50 start-50 rounded-circle">
                 <div id="board" class="position-absolute top-50 start-50 rounded-circle">                
                 <div id="cube2" class="">
-                    <div data-index="0" class="side2 front2"></div>
-                    <div data-index="1" class="side2 bottom2"></div>
-                    <div data-index="2" class="side2 top2"></div>
-                    <div data-index="3" class="side2 left2"></div>
-                    <div data-index="4" class="side2 right2"></div>
-                    <div data-index="5" class="side2 back2"></div>
+                    <div data-index="1" class="side2 front2"></div>
+                    <div data-index="2" class="side2 bottom2"></div>
+                    <div data-index="3" class="side2 top2"></div>
+                    <div data-index="4" class="side2 left2"></div>
+                    <div data-index="5" class="side2 right2"></div>
+                    <div data-index="6" class="side2 back2"></div>
                 </div>
             </div>
             <audio autoplay="false" id="roll-dice-sound">

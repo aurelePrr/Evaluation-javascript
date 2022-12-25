@@ -1,3 +1,11 @@
+const muteSoundsBtn = document.getElementById('mute-sounds-btn')
+const soundsBtn = document.getElementById('sounds-btn')
+const boomSound = document.getElementById('boom-sound')
+const dropSound = document.getElementById('boom-sound')
+const looseSound = document.getElementById('loose-sound')
+const winSound = document.getElementById('success-sound')
+/* SOUNDS */
+const rollDiceSound = document.getElementById('roll-dice-sound')
 /* HOME */
 const homeScreen = document.getElementById('home-screen')
 const startGameBtn = document.getElementById('start-game-btn')
@@ -19,6 +27,9 @@ const gameTitle = document.getElementById('game-title')
         let iaCount = document.getElementById('ia-count')
         let iaRoundCount = document.getElementById('ia-round-count')
         let iaScore = document.getElementById('ia-score-card')
+    /* OPTIONS */
+    const optionsGameBtn = document.getElementById('options-game-btn')
+    const optionsScreen = document.getElementById('options-screen')
 
 /* GAMEPLAY */
 const playScreen = document.getElementById('play-screen')
@@ -36,17 +47,18 @@ const form = document.getElementById('form')
 const closeFormBtn = document.getElementById('close-form-btn')
 const submitFormBtn = document.getElementById('submit-form-btn')
 
+
 /* PLAYERS OBJECT */
 const player = {
     activePlayer: true,
     player: {
         roundScore: 0,
-        score: 0,
+        score: 90,
     },
     roundCount: 0,
     ia: {
         roundScore: 0,
-        score: 0,
+        score: 90,
     } ,
 }
 
@@ -92,8 +104,9 @@ let titleLineDrawing1 = anime({
   function rollDiceAnimation() {
     console.log('rd anim');
     cube2.style.display = 'block'
-    cube2.style.animation = "spin2 2s cubic-bezier(.1,.75,.79,1.08)"
+    cube2.style.animation = "spin2 2.5s cubic-bezier(.1,.75,.79,1.08)"
     setTimeout( () => {
+        cube2.style.transform = "rotate(0, 0)"
         cube2.style.display = 'none'
     },'2500')
   }
@@ -138,12 +151,22 @@ function seeScores(){
     animationDisplayBlock(scoreScreen, .8, 'ease')
 }
 
+/* function closeScores(){
+
+} */
+
+function seeOptions() {
+    console.log('options screen');
+    homeScreens()
+    animationDisplayBlock(optionsScreen, .8, 'ease')
+}
+
 const playBoomSound = () => {
-    document.getElementById('boom-sound').play()
+    boomSound.play()
 }
 
 const playDropSound = () => {
-    document.getElementById('drop-sound').play()
+   dropSound.play()
 }
 const stateBuild = () => {
     playBoomSound()
@@ -164,6 +187,7 @@ const stateBuild = () => {
     animationF(gameTitle, 'rotate', 9)
     animationF(playerScore, 'fade-down-right', 0.6, 'ease-out')
     animationF(iaScore, 'fade-down-left', 0.6, 'ease-out')
+    muteSoundsBtn.style.top = "80%"
     cardTurnAnimationAdd(iaScore)
 
 }
@@ -217,7 +241,7 @@ function playerWin() {
     disabledBtn(restartBtn)
     animationDisplayNone(playScreen, .8, 'ease-out')
     animationDisplayBlock(playerWinScreen, .8, 'ease-out')
-    document.getElementById('success-sound').play()
+    winSound.play()
     setTimeout( () => {
         animationDisplayBlock(document.querySelector('.win-word'))
     }, '800')
@@ -235,7 +259,7 @@ function iaWin() {
     disabledBtn(restartBtn)
     animationDisplayNone(playScreen, .8, 'ease-in')
     animationDisplayBlock(iaWinScreen, .8, 'ease-in')
-    document.getElementById('loose-sound').play()
+    looseSound.play()
     setTimeout( () => {
         animationDisplayBlock(document.querySelector('.loose-word'))
     }, '800')
@@ -266,7 +290,6 @@ function closeForm() {
 /* GAMEPLAY FUNCTIONS */
 const rollDice = () => {
     let rollFace = Math.floor(Math.random() * (6-1+1)+1)
-/*     removeEvent() */
     disabledBtn(rollDiceBtn)
     disabledBtn(holdBtn)
     if(player.activePlayer === true) {
@@ -320,7 +343,6 @@ const rollDice = () => {
     }
 }
 const playRollDiceSound = () =>{
-    const rollDiceSound = document.getElementById('roll-dice-sound')
     rollDiceSound.play()
 }
 const hold = () => {
@@ -379,10 +401,12 @@ const resetGame = () => {
     player.activePlayer = true
     player.player.score = 0
     player.player.roundScore = 0
-    player.ia.score = 0
-    player.ia.roundScore = 0
     playerCount.innerHTML = 0
     playerRoundCount.innerHTML = 0
+    player.ia.score = 0
+    player.ia.roundScore = 0
+    iaCount.innerHTML = 0
+    iaRoundCount.innerHTML = 0    
     animationDisplayNone(playScreen, .8, 'ease-in')
     disabledBtn(restartBtn)
     animationDisplayBlock(homeScreen, .8, 'ease-in')
@@ -410,23 +434,39 @@ function addEvent() {
     holdBtn.addEventListener('click', hold)              
 }
 
-function debounce(callback, delay) {
-    let timer
-    return function() {
-      const args = arguments
-      const context = this
-      clearTimeout(timer)
-      timer = setTimeout(function() {
-        callback.apply(context, args)
-      }, delay)
-    }
+//MUTE SOUNDS FUNCTIONS
+function muteSounds() {
+    animationDisplayNone(muteSoundsBtn, .8, 'ease')
+    disabledBtn(muteSoundsBtn)
+    reabledBtn(soundsBtn)
+    animationDisplayBlock(soundsBtn, .8, 'ease')
+    rollDiceSound.muted = true
+    boomSound.muted = true
+    dropSound.muted = true
+    looseSound.muted = true
+    winSound.muted = true
 }
+
+const reabledSounds = () => {
+    animationDisplayNone(soundsBtn, .8, 'ease')
+    disabledBtn(soundsBtn)
+    reabledBtn(muteSoundsBtn)
+    animationDisplayBlock(muteSoundsBtn, .8, 'ease')
+    rollDiceSound.muted = false
+    boomSound.muted = false
+    dropSound.muted = false
+    looseSound.muted = false
+    winSound.muted = false
+}
+
 // ADD EVENTS LISTENERS
+muteSoundsBtn.addEventListener('click', muteSounds)
     /* HOME */
     gameRulesBtn.addEventListener('click', seeRules)
     rulesAcceptBtn.addEventListener('click', closeRules);
     scoreGameBtn.addEventListener('click', seeScores)
     startGameBtn.addEventListener('click', stateBuild)
+    optionsGameBtn.addEventListener('click', seeOptions)
     /* PLAY SCREEN */
     rollDiceBtn.addEventListener('click', rollDice)
     rollDiceBtn.addEventListener('click', rollDiceAnimation)
@@ -435,4 +475,4 @@ function debounce(callback, delay) {
     holdBtn.addEventListener('click', playDropSound)
     restartBtn.addEventListener('click', resetGame)
 
-    closeFormBtn.addEventListener('click', closeForm)
+closeFormBtn.addEventListener('click', closeForm)

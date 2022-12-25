@@ -7441,8 +7441,8 @@ textarea.form-control-lg {
   top: 80% !important;
 }
 
-.top-91 {
-  top: 91% !important;
+.top-97 {
+  top: 97% !important;
 }
 
 .top-100 {
@@ -7489,8 +7489,8 @@ textarea.form-control-lg {
   bottom: 80% !important;
 }
 
-.bottom-91 {
-  bottom: 91% !important;
+.bottom-97 {
+  bottom: 97% !important;
 }
 
 .bottom-100 {
@@ -7537,8 +7537,8 @@ textarea.form-control-lg {
   left: 80% !important;
 }
 
-.start-91 {
-  left: 91% !important;
+.start-97 {
+  left: 97% !important;
 }
 
 .start-100 {
@@ -7585,8 +7585,8 @@ textarea.form-control-lg {
   right: 80% !important;
 }
 
-.end-91 {
-  right: 91% !important;
+.end-97 {
+  right: 97% !important;
 }
 
 .end-100 {
@@ -13542,7 +13542,7 @@ textarea.form-control-lg {
   --btnBorder: rgb(105, 97, 97) ;
   --btnHover: rgb(46, 180, 151);
   --btnPrimaryHover: rgb(230, 134, 86);
-  --scaleMarginBtn: 0.6rem;
+  --scaleMarginBtn:5px;
 }
 
 body {
@@ -13637,7 +13637,7 @@ body {
   background: url(./images/dice/six.png) no-repeat center/cover;
   transform: rotateY(-180deg) translateZ(calc(var(--cubeSize) / 2));
 }
-#home-screen .home-btn #start-game-btn, #home-screen .home-btn #rules-game-btn, #home-screen .home-btn #score-game-btn {
+#home-screen .home-btn #start-game-btn, #home-screen .home-btn #rules-game-btn, #home-screen .home-btn #score-game-btn, #home-screen .home-btn #options-game-btn {
   display: block;
   cursor: grab;
   padding: 0.4rem 1.3rem;
@@ -13649,7 +13649,7 @@ body {
   text-shadow: 1px 1px 0px rgb(7, 7, 7);
   box-shadow: 0px 0px 4px 4px rgba(7, 7, 7, 0.38) inset;
 }
-#home-screen .home-btn #start-game-btn:hover, #home-screen .home-btn #rules-game-btn:hover, #home-screen .home-btn #score-game-btn:hover {
+#home-screen .home-btn #start-game-btn:hover, #home-screen .home-btn #rules-game-btn:hover, #home-screen .home-btn #score-game-btn:hover, #home-screen .home-btn #options-game-btn:hover {
   background: var(--btnHover);
 }
 #home-screen .home-btn #start-game-btn:hover {
@@ -13657,10 +13657,14 @@ body {
   margin-bottom: var(--scaleMarginBtn);
 }
 #home-screen .home-btn #rules-game-btn:hover {
-  transform: translateY(5px) scale(1.3);
-  margin-bottom: var(--scaleMarginBtn);
+  transform: translateY(var(--scaleMarginBtn)) scale(1.3);
+  margin-bottom: 10px;
 }
 #home-screen .home-btn #score-game-btn:hover {
+  transform: translateY(var(--scaleMarginBtn)) scale(1.3);
+  margin-bottom: 10px;
+}
+#home-screen .home-btn #options-game-btn:hover {
   transform: translateY(var(--scaleMarginBtn)) scale(1.3);
 }
 #home-screen .sound-source {
@@ -13709,6 +13713,113 @@ body {
   display: none;
   opacity: 0;
   transform: translate(-50%);
+}
+
+#options-screen {
+  width: 100%;
+  height: 100vh;
+  background: rgba(12, 12, 12, 0.8);
+  display: none;
+  font-size: 1.4rem;
+}
+#options-screen #options-form {
+  transform: translate(-50%);
+  width: 100%;
+}
+#options-screen .line {
+  width: 80%;
+  height: 0.3rem;
+  top: -2.5rem;
+}
+#options-screen #legend-mute-sounds-btn {
+  position: absolute;
+  left: 40%;
+}
+#options-screen #mute-sounds-btn {
+  /*  position: absolute;
+   top: 3%;
+   left: 1rem;
+   width: 40px;
+   height: 40px; */
+  position: relative;
+  top: 1rem;
+  width: 120px;
+  height: 59px;
+  margin: 2rem auto;
+  cursor: grab;
+}
+#options-screen #mute-sounds-btn .checkboxSound {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  cursor: grab;
+  z-index: 3;
+  opacity: 0;
+}
+#options-screen #mute-sounds-btn .box-sound-option, #options-screen #mute-sounds-btn .background-sound-option {
+  background: var(--btnColor);
+  border-radius: 0.3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+#options-screen #mute-sounds-btn .box-sound-option {
+  z-index: 2;
+  perspective: 110px;
+}
+#options-screen #mute-sounds-btn .box-sound-option span {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  width: 54px;
+  height: 49px;
+  border-radius: 3px;
+  transform: rotateY(-180deg);
+  transform-origin: 0% 50%;
+  transition: all 0.8s ease;
+  z-index: 1;
+}
+#options-screen #mute-sounds-btn .background-sound-option::after, #options-screen #mute-sounds-btn .background-sound-option::before {
+  position: absolute;
+  transition: 0.5s linear;
+  font-weight: bold;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#options-screen #mute-sounds-btn .background-sound-option::after {
+  content: "OFF";
+  right: -85px;
+  color: #7fd2f3;
+  opacity: 0;
+}
+#options-screen #mute-sounds-btn .background-sound-option::before {
+  content: "ON";
+  left: -80px;
+  color: #f59292;
+}
+#options-screen #mute-sounds-btn .checkboxSound:checked + .box span {
+  background: #03a9f4;
+  transform: rotateY(0);
+}
+#options-screen #mute-sounds-btn .checkboxSound:checked ~ .background-sound-option {
+  background: #c8e7f3;
+}
+#options-screen #mute-sounds-btn .background-sound-option {
+  width: 100%;
+  background: #f1c1c1;
+  border-radius: 4px;
+  transition: 0.2s ease;
+  z-index: 1;
+}
+#options-screen #mute-sounds-btn .checkboxSound:checked ~ .background-sound-option::before {
+  opacity: 0;
+}
+#options-screen #mute-sounds-btn .checkboxSound:checked ~ .background-sound-option::after {
+  opacity: 1;
 }
 
 #play-screen {
