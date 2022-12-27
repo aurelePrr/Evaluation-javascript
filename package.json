@@ -1,8 +1,9 @@
 {
   "name": "evaluation-javascript",
   "version": "1.0.0",
+  "type": "module",
   "description": "evaluation 2 js",
-  "main": "script.js",
+  "main": "game.js",
   "scripts": {
     "cs": "sass --watch scss:assets/css"
   },

@@ -152,7 +152,6 @@ function seeScores(){
 }
 
 /* function closeScores(){
-
 } */
 
 function seeOptions() {
